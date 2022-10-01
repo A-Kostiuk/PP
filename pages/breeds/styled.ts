@@ -1,0 +1,18 @@
+import styled from 'styled-components';
+
+export const ControlPanel = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+`;
+
+export const DisplayPanel = styled.div`
+  display: flex;
+  flex-grow: 1;
+  gap: 10px;
+`;

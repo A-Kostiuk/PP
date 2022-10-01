@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Section = styled.section`
   padding: 20px;
-  background-color: ${props => props.theme.colors.baseWhite};
+  background-color: ${props => props.theme.colors.primaryBackground};
   border-radius: 20px;
   height: 100%;
   display: flex;

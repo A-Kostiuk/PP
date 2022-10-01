@@ -7,7 +7,7 @@ export interface ITheme {
   colors: Colors;
   viewports: Viewports;
   font: Font;
-  pageIndents: PageIndents
+  pageIndents: PageIndents;
 }
 
 interface Viewports {
@@ -20,6 +20,17 @@ interface Viewports {
 interface Colors {
   baseWhite: string;
   baseBlack: string;
+  green100: string;
+  purple100: string;
+  orange100: string;
+  pink100: string;
+  appBackground: string;
+  primary: string;
+  secondary: string;
+  grey100: string;
+  grey200: string;
+  text: string;
+  primaryBackground: string;
 }
 
 interface Font {

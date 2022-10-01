@@ -1,15 +1,23 @@
 import React, { FC } from 'react';
+import GlobalLayout from '../../components/layouts/global-layout/global-layout';
+import Menu from '../../components/blocks/menu/menu';
+import { Section } from '../../components/styled';
+import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
+import VotingWindow from '../../components/layouts/voting-window/voting-window';
+import VotingLogsList from '../../components/layouts/voting-logs-list/voting-logs-list';
 
-interface Props {
 
-}
-
-const Voting: FC<Props> = (props) => {
+const Index: FC = () => {
   return (
-    <div>
-      Voting
-    </div>
+    <GlobalLayout>
+      <Menu />
+      <Section>
+        <Breadcrumbs marginBottom={20} />
+        <VotingWindow />
+        <VotingLogsList />
+      </Section>
+    </GlobalLayout>
   );
 };
 
-export default Voting;
+export default Index;

@@ -9,16 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^0.27.2",
+    "dayjs": "^1.11.5",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.36.1",
+    "react-redux": "^8.0.4",
+    "react-select": "^5.4.0",
+    "styled-components": "^5.3.5",
+    "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "@types/node": "18.7.4",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5",
     "typescript": "4.7.4"
-  }
+  },
+  "author": "Andriy Kostiuk <andriykostiuk1@gmail.com>"
 }
