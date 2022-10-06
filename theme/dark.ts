@@ -6,4 +6,14 @@ import { defaultTheme } from './default';
 export const darkTheme: DefaultTheme = {
   type: ThemeEnum.dark,
   ...defaultTheme,
+  colors: {
+    ...defaultTheme.colors,
+    appBackground: '#1D1D1D',
+    primaryBackground: 'rgba(255, 255, 255, 0.05)',
+    text: '#FFFFFF',
+    btnBackground: 'rgba(255, 134, 142, 0.2)',
+    linkBackground: 'rgba(255, 255, 255, 0.1)',
+    votingLogBg: 'rgba(255, 255, 255, 0.05)',
+    breedsControlBg: 'rgba(255, 255, 255, 0.05)',
+  },
 };

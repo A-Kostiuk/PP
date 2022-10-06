@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Li, P, Ul } from '../../styled';
 
 interface IBreadcrumbsList {
-  $marginBottom?: number
+  $marginBottom?: number;
 }
 
 export const BreadcrumbsList = styled(Ul)<IBreadcrumbsList>`
@@ -29,13 +29,16 @@ const breadcrumbStyles = css`
 `;
 
 export const BreadcrumbLink = styled.a`
+  cursor: pointer;
+  transition: .2s;
   ${breadcrumbStyles};
   display: block;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.btnBackground};
   color: ${props => props.theme.colors.secondary};
+  
 
   :hover {
-    background-color: ${({theme}) => theme.colors.primary};
+    background-color: ${({theme}) => theme.colors.secondary};
     color: ${props => props.theme.colors.baseWhite};
   }
 `;
@@ -47,10 +50,11 @@ export const CurrentLocation = styled(P)`
 `;
 
 export const PreviousPage = styled.button`
+  transition: 0.2s;
   border: none;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.btnBackground};
   cursor: pointer;
   display: flex;
   justify-content: center;

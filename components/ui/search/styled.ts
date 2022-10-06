@@ -12,7 +12,7 @@ export const Label = styled.label`
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: ${({theme}) => theme.colors.primary};
+    background-color: ${({theme}) => theme.colors.btnBackground};
     border-radius: 10px;
     top: 10px;
     right: 10px;
@@ -37,18 +37,19 @@ export const SearchField = styled.input`
   width: 100%;
   border: none;
   border-radius: 20px;
-  background-color: ${props => props.theme.colors.baseWhite};
+  background-color: ${props => props.theme.colors.primaryBackground};
+  color: ${props => props.theme.colors.text};
   padding: 15px 60px 15px 20px;
   font-size: 20px;
   line-height: 30px;
 
   :hover {
-    border: 2px solid #FBE0DC;
+    border: 2px solid ${props => props.theme.colors.primary};
     padding: 13px 58px 13px 18px;
   }
 
   :focus {
-    border: 2px solid #FF868E;
+    border: 2px solid ${props => props.theme.colors.secondary};
     padding: 13px 58px 13px 18px;
     outline: none;
   }

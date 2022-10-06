@@ -6,12 +6,17 @@ import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import UploadButton from '../../components/ui/upload-button/upload-button';
 import { Container } from './styled';
 import GalleryControlPanel from '../../components/layouts/gallery-control-panel/gallery-control-panel';
+import useDarkMode from 'use-dark-mode';
 
 interface Props {
 
 }
 
 const Index: FC<Props> = (props) => {
+  const darkMode = useDarkMode();
+  const handleButtonClick = () => {
+    darkMode.toggle();
+  };
   return (
     <GlobalLayout>
       <Menu />
@@ -21,6 +26,8 @@ const Index: FC<Props> = (props) => {
           <UploadButton />
         </Container>
         <GalleryControlPanel />
+        <button onClick={handleButtonClick}>Toggle theme</button>
+        <p>{darkMode.value}</p>
       </Section>
     </GlobalLayout>
   );

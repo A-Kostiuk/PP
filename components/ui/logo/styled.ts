@@ -13,6 +13,10 @@ export const Icon = styled.div`
   svg {
     width: 24px;
     height: 24px;
+
+    path {
+      fill: ${({theme}) => theme.colors.text};
+    }
   }
 `;
 

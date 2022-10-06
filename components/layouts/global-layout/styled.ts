@@ -10,6 +10,7 @@ export const Content = styled.div`
 
   @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
     padding: ${({theme}) => theme.pageIndents.tabletPadding};
+    height: 100vh;
   }
 
   @media (min-width: ${({theme}) => theme.viewports.laptopWidth}) {
@@ -18,8 +19,7 @@ export const Content = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 80px;
-    height: 100vh;
-    min-height: 600px;
+    //min-height: 600px;
   }
 
   @media (min-width: ${({theme}) => theme.viewports.desktopWidth}) {
@@ -34,6 +34,7 @@ export const Meow = styled(P)`
   font-size: 44px;
   line-height: 58px;
   margin: 80px 0 10px;
+  color: ${({theme}) => theme.colors.text};
 `;
 
 export const Title = styled.h1`
@@ -89,6 +90,7 @@ export const RightColumn = styled.div<IColumn>`
             display: flex;
             flex-direction: column;
             gap: 10px;
+            height: 100%;
           `
   };
 `;

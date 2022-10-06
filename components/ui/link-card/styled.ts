@@ -10,7 +10,7 @@ export const Title = styled(P)`
   text-align: center;
   padding: 10px;
   border-radius: 10px;
-  background-color: ${props => props.theme.colors.baseWhite};
+  background-color: ${props => props.theme.colors.linkBackground};
 `;
 
 interface ICard {
@@ -22,8 +22,10 @@ interface ICard {
 export const Card = styled.a<ICard>`
   cursor: pointer;
 
+
   :hover ${Title} {
     background-color: ${props => props.theme.colors.primary};
+    transition: .2s;
   }
 
   :active ${Title} {

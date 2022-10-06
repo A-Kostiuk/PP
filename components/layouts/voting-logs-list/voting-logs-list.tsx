@@ -1,39 +1,21 @@
 import React, { FC } from 'react';
-import { LogsList } from './styled';
+import { LogsList, NoLogs, Wrapper } from './styled';
 import VotingLog from '../../ui/voting-log/voting-log';
+import { useCustomSelector } from '../../../hooks/store';
+import { selectVoting } from '../../../store/selectors';
 
-interface Props {
-
-}
-
-export interface ILog {
-  time: string
-  imageId: string
-  type: string
-  iconId: string
-}
-
-const votingLogsList: ILog[] = [
-  {
-    time: '20:27',
-    imageId: 'fQSunHvl8',
-    type: 'Likes',
-    iconId: 'favorite',
-  }, {
-    time: '20:27',
-    imageId: 'fQSunHvl6',
-    type: 'Likes',
-    iconId: 'dislike',
-  },
-];
-
-const VotingLogsList: FC<Props> = (props) => {
+const VotingLogsList: FC = () => {
+  const votingLogsList = useCustomSelector(selectVoting).actionLogs;
   return (
-    <LogsList>
-      {votingLogsList.map((log) => (
-          <VotingLog key={log.imageId} {...log} />
-      ))}
-    </LogsList>
+    <Wrapper>
+      <LogsList>
+        {votingLogsList.length ? votingLogsList.map((log) => (
+            <VotingLog key={log.imageId} {...log} />
+          )) :
+          <NoLogs>You haven't any logs yet</NoLogs>
+        }
+      </LogsList>
+    </Wrapper>
   );
 };
 

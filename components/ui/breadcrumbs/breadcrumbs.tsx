@@ -11,7 +11,7 @@ interface Props {
 const Breadcrumbs: FC<Props> = ({marginBottom}) => {
   const router = useRouter();
 
-  const breadcrumbs = router.pathname.split('/').filter((element) => element.length > 0);
+  const breadcrumbs = router.asPath.split('/').filter((element) => element.length > 0);
 
   const handlePreviousPageClick = () => router.back();
 

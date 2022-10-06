@@ -10,7 +10,7 @@ export const SortButtonStyled = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background-color: ${props => props.theme.colors.grey100};
+  background-color: ${props => props.theme.colors.breedsControlBg};
 
   :hover {
     border: 2px solid ${({theme}) => theme.colors.primary};

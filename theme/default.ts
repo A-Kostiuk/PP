@@ -15,6 +15,11 @@ export const defaultTheme: ITheme = {
     primary: '#FBE0DC',
     secondary: '#FF868E',
     primaryBackground: '#FFFFFF',
+    btnBackground: '#FBE0DC',
+    linkBackground: '#FFF',
+    votingLogBg: '#F8F8F7',
+    breedsControlBg: '#F8F8F7',
+    photoHover: 'rgba(255, 134, 142, 0.6)',
   },
   viewports: {
     mobileWidth: '375px',

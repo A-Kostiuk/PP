@@ -31,6 +31,11 @@ interface Colors {
   grey200: string;
   text: string;
   primaryBackground: string;
+  btnBackground: string;
+  linkBackground: string;
+  votingLogBg: string;
+  breedsControlBg: string;
+  photoHover: string;
 }
 
 interface Font {

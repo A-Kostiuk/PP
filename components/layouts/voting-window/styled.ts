@@ -1,6 +1,26 @@
 import styled from 'styled-components';
 import { Ul } from '../../styled';
 
+export const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+
+  svg circle {
+    fill: ${({theme}) => theme.colors.secondary};
+  }
+
+  svg stop {
+    stop-color: ${({theme}) => theme.colors.secondary};
+  }
+
+  @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
+    height: 360px;
+  }
+`;
+
 export const Img = styled.img`
   display: block;
   width: 100%;

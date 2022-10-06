@@ -6,7 +6,7 @@ export const StyledVotingLog = styled(Li)`
   grid-template-columns: 61px 1fr min-content;
   gap: 20px;
   padding: 15px;
-  background-color: ${props => props.theme.colors.grey100};
+  background-color: ${props => props.theme.colors.votingLogBg};
   border-radius: 10px;
   align-items: center;
 
@@ -18,7 +18,7 @@ export const StyledVotingLog = styled(Li)`
 
 export const Time = styled(P)`
   padding: 3px 10px;
-  background-color: ${props => props.theme.colors.baseWhite};
+  background-color: ${props => props.theme.colors.primaryBackground};
   border-radius: 5px;
 `;
 
@@ -26,13 +26,13 @@ export const Description = styled(P)`
   color: ${props => props.theme.colors.grey200};
 
   span {
-    color: ${({theme}) => theme.colors.baseBlack};
+    color: ${({theme}) => theme.colors.text};
     font-weight: 500;
   }
 `;
 
 interface IIcon {
-  $iconId: string
+  $iconId: string;
 }
 
 export const Icon = styled.div<IIcon>`
@@ -42,16 +42,16 @@ export const Icon = styled.div<IIcon>`
 
   svg path {
     fill: ${props => {
-  switch (props.$iconId) {
-    case 'like':
-      return props.theme.colors.green100;
-    case 'favorite':
-      return props.theme.colors.pink100;
-    case 'dislike':
-      return props.theme.colors.orange100;
-    default:
-      return props.theme.colors.grey100;
-  }
-}};
+      switch (props.$iconId) {
+        case 'like':
+          return props.theme.colors.green100;
+        case 'favorite':
+          return props.theme.colors.pink100;
+        case 'dislike':
+          return props.theme.colors.orange100;
+        default:
+          return props.theme.colors.grey100;
+      }
+    }};
   }
 `;

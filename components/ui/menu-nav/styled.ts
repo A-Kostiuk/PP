@@ -8,10 +8,12 @@ export const NavList = styled(Ul)`
 `;
 
 export const NavLink = styled.a`
+  cursor: pointer;
   display: block;
   padding: 15px;
   border-radius: 20px;
-  background-color: ${({theme}) => theme.colors.primaryBackground};
+  background-color: ${({theme}) => theme.colors.linkBackground};
+  transition: .2s;
 
   svg {
     display: block;
