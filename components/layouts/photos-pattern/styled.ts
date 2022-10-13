@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Ul } from '../../styled';
 
 export const Wrapper = styled.div`
+  margin-bottom: 10px;
   @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
     position: relative;
     width: 100%;
@@ -13,6 +14,18 @@ export const PhotosPatternStyled = styled(Ul)`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  li img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  li {
+    border-radius: 20px;
+    overflow: hidden;
+  }
 
   @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
     position: absolute;
@@ -26,17 +39,12 @@ export const PhotosPatternStyled = styled(Ul)`
     overflow-y: auto;
 
     li img {
-      display: block;
-      width: 100%;
       height: 100%;
-      object-fit: cover;
     }
 
     li {
       min-height: 140px;
       background: ${props => props.theme.colors.grey100};
-      border-radius: 20px;
-      overflow: hidden;
     }
 
     li:nth-child(10n+1), li:nth-child(8n+8) {

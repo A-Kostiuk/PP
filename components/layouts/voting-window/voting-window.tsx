@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from 'react';
-import { ActionButton, Img, Loader, VotingActionsList } from './styled';
+import { ActionButton, Img, VotingActionsList } from './styled';
 import { SharedSvgIcons } from '../../ui/shared-svg-icons/shared-svg-icons';
 import { Li } from '../../styled';
 import { useCustomDispatch, useCustomSelector } from '../../../hooks/store';
 import { selectVoting } from '../../../store/selectors';
 import { dislike, favorite, fetchVotingPicture, like } from '../../../store/voting-slice/voting-slice';
 import { throttle } from 'throttle-typescript';
+import Loader from '../../ui/loader/loader';
 
 interface VotingAction {
   title: string;
@@ -50,7 +51,7 @@ const VotingWindow: FC = () => {
   return (
     <>
       {isLoading ?
-        <Loader><SharedSvgIcons width={100} height={100} id={'loader'} /></Loader> :
+        <Loader /> :
         <Img
           src={votingPicture.url}
           width={640} height={360} alt="" />}

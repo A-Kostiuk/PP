@@ -23,6 +23,9 @@ export const StyledLink = styled.a`
   height: 100%;
   position: relative;
   z-index: 0;
+  border-radius: 20px;
+  overflow: hidden;
+
 
   :hover {
     :before {
@@ -40,3 +43,10 @@ export const StyledLink = styled.a`
     }
   }
 }`;
+
+export const Img = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;

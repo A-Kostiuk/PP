@@ -23,7 +23,7 @@ const initialState: IInitialState = {
 export const fetchVotingPicture = createAsyncThunk<VotingPicture, void>(
   'voting/fetchPicture',
   async () => {
-    const res = await TheCatApi.fetchVotingPicture();
+    const res = await TheCatApi.voting.fetchVotingPicture();
     return res.data[0];
   },
 );
@@ -31,7 +31,7 @@ export const fetchVotingPicture = createAsyncThunk<VotingPicture, void>(
 export const like = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
   'voting/like',
   async (id, {dispatch}) => {
-    await TheCatApi.postVoting({
+    await TheCatApi.voting.postVoting({
       image_id: id,
       sub_id: 'AndriyKostiuk',
       value: 1,
@@ -50,7 +50,7 @@ export const like = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
 export const dislike = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
   'voting/dislike',
   async (id, {dispatch}) => {
-    await TheCatApi.postVoting({
+    await TheCatApi.voting.postVoting({
       image_id: id,
       sub_id: 'AndriyKostiuk',
       value: -1,
@@ -69,7 +69,7 @@ export const dislike = createAsyncThunk<void, string, { dispatch: AppDispatch }>
 export const favorite = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
   'voting/favorite',
   async (id, {dispatch}) => {
-    await TheCatApi.postFavorite({
+    await TheCatApi.voting.postFavorite({
       image_id: id,
       sub_id: 'AndriyKostiuk',
     });

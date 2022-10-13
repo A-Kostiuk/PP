@@ -7,6 +7,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${({theme}) => theme.pageIndents.mobilePadding};
+  min-width: ${({theme}) => theme.viewports.mobileWidth};
 
   @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
     padding: ${({theme}) => theme.pageIndents.tabletPadding};
@@ -19,7 +20,6 @@ export const Content = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 80px;
-    //min-height: 600px;
   }
 
   @media (min-width: ${({theme}) => theme.viewports.desktopWidth}) {

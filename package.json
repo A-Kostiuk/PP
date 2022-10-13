@@ -21,6 +21,7 @@
     "react-select": "^5.4.0",
     "styled-components": "^5.3.5",
     "styled-normalize": "^8.0.7",
+    "swiper": "^8.4.3",
     "throttle-typescript": "^1.1.0",
     "use-dark-mode": "^2.3.1"
   },

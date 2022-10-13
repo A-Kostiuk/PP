@@ -22,7 +22,7 @@ export const defaultTheme: ITheme = {
     photoHover: 'rgba(255, 134, 142, 0.6)',
   },
   viewports: {
-    mobileWidth: '375px',
+    mobileWidth: '400px',
     tabletWidth: '768px',
     laptopWidth: '1024px',
     desktopWidth: '1440px',

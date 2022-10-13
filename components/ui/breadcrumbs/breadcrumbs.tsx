@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { BreadcrumbItem, BreadcrumbLink, BreadcrumbsList, CurrentLocation, PreviousPage } from './styled';
+import { BreadcrumbLink, BreadcrumbsList, CurrentLocation, PreviousPage } from './styled';
 import Link from 'next/link';
 import { SharedSvgIcons } from '../shared-svg-icons/shared-svg-icons';
 import { useRouter } from 'next/router';
+import { Li } from '../../styled';
 
 interface Props {
   marginBottom?: number;
@@ -17,13 +18,13 @@ const Breadcrumbs: FC<Props> = ({marginBottom}) => {
 
   return (
     <BreadcrumbsList $marginBottom={marginBottom}>
-      <BreadcrumbItem>
+      <Li>
         <PreviousPage onClick={handlePreviousPageClick}>
           <SharedSvgIcons width={20} height={20} id="arrowBack" />
         </PreviousPage>
-      </BreadcrumbItem>
+      </Li>
       {breadcrumbs.map((breadcrumb, index, array) => (
-        <BreadcrumbItem key={breadcrumb}>
+        <Li key={breadcrumb}>
           {
             index === (array.length - 1) ?
               <CurrentLocation>{breadcrumb}</CurrentLocation> :
@@ -31,7 +32,7 @@ const Breadcrumbs: FC<Props> = ({marginBottom}) => {
                 <BreadcrumbLink>{breadcrumb}</BreadcrumbLink>
               </Link>
           }
-        </BreadcrumbItem>))}
+        </Li>))}
     </BreadcrumbsList>
   );
 };

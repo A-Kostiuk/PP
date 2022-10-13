@@ -1,41 +1,42 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../index';
-import { Breed } from '../../interfaces/breed';
+import { BreedOption, BreedRequest } from '../../interfaces/breed';
 import theCatApi from '../../axios/the-cat-api';
 import { SelectOption } from '../../interfaces/select-option';
 
 interface Breeds {
   isLoading: boolean;
-  currentBreeds: Breed[] | null;
+  currentBreeds: BreedOption[];
   limit: SelectOption;
   page: number;
-  allBreeds: SelectOption[];
-  selectBreed: SelectOption | null;
+  allBreeds: BreedOption[];
+  selectBreed: BreedOption | null,
 }
 
 const initialState: Breeds = {
   isLoading: false,
-  currentBreeds: null,
+  currentBreeds: [],
   limit: {value: 10, label: 'Limit: 10'},
   page: 0,
   allBreeds: [],
   selectBreed: null,
 };
 
-export const fetchCurrentBreeds = createAsyncThunk<Breed[], void, { state: RootState }>(
+export const fetchCurrentBreeds = createAsyncThunk<BreedOption[], void, { state: RootState }>(
   'breeds/fetchCurrentBreeds',
   async (_, {getState}) => {
     const limit = getState().breeds.limit;
     const page = getState().breeds.page;
-    const res = await theCatApi.fetchCurrentBreeds(limit.value, page);
+    const res = await theCatApi.breeds.fetchCurrentBreeds(limit.value, page);
     return res.data;
   });
 
-export const fetchAllBreeds = createAsyncThunk<SelectOption[], void>(
+
+export const fetchAllBreeds = createAsyncThunk<BreedOption[], void>(
   'breeds/fetchAllBreeds',
   async () => {
-    const req = await theCatApi.fetchAllBreeds();
-    return req.data.map((breed: Breed) => ({value: breed.id, label: breed.name}));
+    const req = await theCatApi.breeds.fetchAllBreeds();
+    return req.data.map((breed: BreedRequest) => ({value: breed.id, label: breed.name, ...breed}));
   },
 );
 
@@ -46,22 +47,21 @@ const breedsSlice = createSlice({
     setLimit(state, action: PayloadAction<SelectOption>) {
       state.limit = action.payload;
       state.page = 0;
-      state.selectBreed = null;
+      state.currentBreeds = state.allBreeds.slice(0, Number(action.payload.value));
+
     },
-    setSelectBreed(state, action: PayloadAction<SelectOption>) {
+    setSelectBreed(state, action: PayloadAction<BreedOption | null>) {
       state.selectBreed = action.payload;
     },
   },
   extraReducers: (builder => {
-    builder.addCase(fetchCurrentBreeds.pending, (state) => {
+    builder.addCase(fetchAllBreeds.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(fetchCurrentBreeds.fulfilled, (state, action) => {
-      state.currentBreeds = action.payload;
-      state.isLoading = false;
     });
     builder.addCase(fetchAllBreeds.fulfilled, (state, action) => {
       state.allBreeds = action.payload;
+      state.isLoading = false;
+      state.currentBreeds = action.payload.slice(0, Number(state.limit.value));
     });
   }),
 });

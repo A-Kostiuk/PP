@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Breed } from '../../../interfaces/breed';
 import {
   Img,
   Wrapper,
@@ -8,66 +9,86 @@ import {
   DescTitle,
   BreedTitle,
   Container,
-  BreedSubtitle,
+  BreedSubtitle, StyledSwiper, NoInformation,
 } from './styled';
-import { Breed } from '../../../interfaces/breed';
+import { SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 interface Props {
-  breed: Breed | null;
+  breed: Breed;
 }
 
 const BreedDesc: FC<Props> = ({breed}) => {
-  if (breed) {
-    const leftColumn = [
-      {
-        title: 'Temperament:',
-        details: breed.temperament,
-      },
-    ];
+  const {temperament, origin, weight, life_span, images, name, id} = breed;
 
-    const rightColumn = [
-      {
-        title: 'Origin:',
-        details: breed.origin,
-      },
-      {
-        title: 'Weight:',
-        // details: breed.weight.metric,
-        details: 'breed.weight.metric',
-      },
-      {
-        title: 'Life span:',
-        details: breed.life_span,
-      },
-    ];
-    return (
-      <>
-        <Img src={breed.image?.url} width={640} height={360} style={{marginBottom: '50px', display: 'block'}} />
-        <Wrapper>
-          <BreedTitle>{breed.name}</BreedTitle>
-          <BreedSubtitle>Family companion cat</BreedSubtitle>
-          <Container>
-            <DescList>
-              {leftColumn.map((desc) => (
-                <div key={desc.title}>
-                  < DescTitle> {desc.title}</DescTitle>
-                  <DescDetails>{desc.details}</DescDetails>
-                </div>
-              ))}
-            </DescList>
-            <DescList>
-              {rightColumn.map((desc) => (
-                <DescWrapper key={desc.title}>
-                  <DescTitle> {desc.title}&nbsp;</DescTitle>
-                  <DescDetails>{desc.details}</DescDetails>
-                </DescWrapper>
-              ))}
-            </DescList>
-          </Container>
-        </Wrapper>
-      </>
-    );
+  const leftColumn = [
+    {
+      title: 'Temperament:',
+      details: temperament,
+    },
+  ];
+
+  const rightColumn = [
+    {
+      title: 'Origin:',
+      details: origin,
+    },
+    {
+      title: 'Weight:',
+      details: weight?.metric,
+    },
+    {
+      title: 'Life span:',
+      details: life_span,
+    },
+  ];
+
+  if (!id) {
+    return (<NoInformation>
+      Sorry, we haven't got any information about this breed.
+    </NoInformation>);
   }
-  return <div>Null</div>;
+  return (
+    <>
+      <StyledSwiper
+        modules={[Pagination]}
+        spaceBetween={20}
+        direction="horizontal"
+        slidesPerView="auto"
+        mousewheel={true}
+        pagination={{
+          type: 'bullets',
+          clickable: true,
+        }}
+      >
+        {images.map(image => <SwiperSlide key={image.id}><Img src={image.url} width={640}
+                                                              height={360} /></SwiperSlide>)}
+      </StyledSwiper>
+      <Wrapper>
+        <BreedTitle>{name}</BreedTitle>
+        <BreedSubtitle>Family companion cat</BreedSubtitle>
+        <Container>
+          <DescList>
+            {leftColumn.map((desc) => (
+              <div key={desc.title}>
+                < DescTitle> {desc.title}</DescTitle>
+                <DescDetails>{desc.details}</DescDetails>
+              </div>
+            ))}
+          </DescList>
+          <DescList>
+            {rightColumn.map((desc) => (
+              <DescWrapper key={desc.title}>
+                <DescTitle> {desc.title}&nbsp;</DescTitle>
+                <DescDetails>{desc.details}</DescDetails>
+              </DescWrapper>
+            ))}
+          </DescList>
+        </Container>
+      </Wrapper>
+    </>
+  );
 };
 export default BreedDesc;

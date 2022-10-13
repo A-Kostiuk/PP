@@ -9,7 +9,7 @@ export const darkTheme: DefaultTheme = {
   colors: {
     ...defaultTheme.colors,
     appBackground: '#1D1D1D',
-    primaryBackground: 'rgba(255, 255, 255, 0.05)',
+    primaryBackground: '#2a2a2a',
     text: '#FFFFFF',
     btnBackground: 'rgba(255, 134, 142, 0.2)',
     linkBackground: 'rgba(255, 255, 255, 0.1)',

@@ -16,24 +16,34 @@ api.interceptors.request.use(config => {
 
 
 const TheCatApi = {
-  fetchVotingPicture: () => {
-    return api.get('/images/search');
+  voting: {
+    fetchVotingPicture: () => {
+      return api.get('/images/search');
+    },
+    postVoting: (data: IPostVoting) => {
+      return api.post('/votes', data);
+    },
+    postFavorite: (data: IPostFavorite) => {
+      return api.post('/favourites', data);
+    },
   },
-  postVoting: (data: IPostVoting) => {
-    return api.post('/votes', data);
+  breeds: {
+    fetchCurrentBreeds: (limit: number | string, page: number | string) => {
+      return api.get(`/breeds?limit=${limit}&page=${page}`);
+    },
+    fetchAllBreeds: () => {
+      return api.get('/breeds');
+    },
   },
-  postFavorite: (data: IPostFavorite) => {
-    return api.post('/favourites', data);
+  breed: {
+    fetchBreed: (breedId: string | string[]) => {
+      return api.get(`/breeds/${breedId}`);
+    },
+    fetchBreedImages: (breedId: string | string[]) => {
+      return api.get(`/images/search?limit=5&breed_ids=${breedId}`);
+    },
   },
-  fetchCurrentBreeds: (limit: number | string, page: number | string) => {
-    return api.get(`/breeds?limit=${limit}&page=${page}`);
-  },
-  fetchAllBreeds: () => {
-    return api.get('/breeds');
-  },
-  fetchBreed: (breedId: string) => {
-    return api.get(`/breeds/${breedId}`);
-  },
+
 };
 
 export default TheCatApi;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import { CSSProperties } from '@emotion/serialize';
 import { darkTheme } from '../../../theme/dark';
 import { lightTheme } from '../../../theme/light';
@@ -8,12 +8,13 @@ import { SelectOption } from '../../../interfaces/select-option';
 
 interface Props {
   options: SelectOption[];
-  onChange: (option: SelectOption | null) => void;
+  onChange: (newValue: SingleValue<any>) => void;
   value: SelectOption | null;
   placeholder?: string;
+  isClearable?: boolean;
 }
 
-const BreedsCustomSelect: FC<Props> = ({options, onChange, value, placeholder}) => {
+const BreedsCustomSelect: FC<Props> = ({options, onChange, value, placeholder, isClearable = false}) => {
   const isDarkMode = useDarkMode().value;
   const theme = isDarkMode ? darkTheme : lightTheme;
 
@@ -50,6 +51,7 @@ const BreedsCustomSelect: FC<Props> = ({options, onChange, value, placeholder}) 
             styles={customStyles}
             onChange={onChange}
             value={value}
+            isClearable={isClearable}
             instanceId="long-value-select"
             components={{
               IndicatorSeparator: () => null,

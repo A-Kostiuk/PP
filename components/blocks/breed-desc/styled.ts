@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { P } from '../../styled';
+import { Swiper } from 'swiper/react';
 
 export const Wrapper = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   border: 2px solid #FBE0DC;
@@ -10,9 +12,11 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 70px;
+  @media (min-width: ${({theme}) => theme.viewports.tabletWidth}) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+  }
 `;
 
 export const BreedTitle = styled(P)`
@@ -21,7 +25,7 @@ export const BreedTitle = styled(P)`
   line-height: 1.5;
   font-size: 36px;
   margin: -55px auto 0;
-  background-color: ${props => props.theme.colors.baseWhite};
+  background-color: ${props => props.theme.colors.primaryBackground};
   padding: 0 40px;
 `;
 
@@ -54,9 +58,45 @@ export const DescWrapper = styled.div`
 export const Img = styled.img`
   display: block;
   width: 100%;
-  height: 360px;
-  margin-bottom: 50px;
-  border-radius: 20px;
+  height: 100%;
   object-fit: cover;
+  border-radius: 20px;
+
+`;
+
+export const StyledSwiper = styled(Swiper)`
+  height: 360px;
+  border-radius: 20px;
+
+
+  .swiper-pagination {
+    overflow: auto;
+    background-color: ${({theme}) => theme.colors.primaryBackground};
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+    border-radius: 20px;
+    width: auto;
+    left: 50%;
+    transform: translate(-50%, 0)
+  }
+
+  .swiper-pagination-bullet {
+    background-color: ${({theme}) => theme.colors.primary};
+    opacity: 1;
+    margin: 0 5px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${({theme}) => theme.colors.secondary};
+  }
+}
+`;
+
+export const NoInformation = styled(P)`
+  font-weight: 500;
 `;
 

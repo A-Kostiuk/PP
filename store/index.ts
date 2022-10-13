@@ -1,11 +1,13 @@
-import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import votingReducer from './voting-slice/voting-slice';
 import breedsReducer from './breeds-slice/breeds-slice';
+import breedReducer from './breed-slice/breed-slice';
 
 const rootReducer = combineReducers({
   voting: votingReducer,
   breeds: breedsReducer,
+  breed: breedReducer,
 });
 
 const makeStore = () => configureStore({

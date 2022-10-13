@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Li, P, Ul } from '../../styled';
+import { P, Ul } from '../../styled';
 
 interface IBreadcrumbsList {
   $marginBottom?: number;
@@ -8,13 +8,8 @@ interface IBreadcrumbsList {
 export const BreadcrumbsList = styled(Ul)<IBreadcrumbsList>`
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: ${props => props.$marginBottom ? `${props.$marginBottom}px` : 0};
-`;
-
-export const BreadcrumbItem = styled(Li)`
-  :not(:last-child) {
-    margin-right: 10px;
-  }
 `;
 
 const breadcrumbStyles = css`
@@ -35,7 +30,7 @@ export const BreadcrumbLink = styled.a`
   display: block;
   background-color: ${props => props.theme.colors.btnBackground};
   color: ${props => props.theme.colors.secondary};
-  
+
 
   :hover {
     background-color: ${({theme}) => theme.colors.secondary};
