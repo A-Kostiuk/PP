@@ -12,7 +12,7 @@ const BreedLink: FC<Props> = ({breed}) => {
     <Link href={`/breeds/${breed.id}`}>
       <StyledLink>
         <BreedName>{breed.name}</BreedName>
-        <Img src={breed.image.url} width={190} height={140} alt={breed.name} />
+        <Img src={breed.image?.url} width={190} height={140} alt={breed.name} />
       </StyledLink>
     </Link>
   );

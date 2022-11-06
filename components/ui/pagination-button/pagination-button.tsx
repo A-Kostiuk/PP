@@ -2,13 +2,14 @@ import React, { FC, ReactNode } from 'react';
 import { Button } from './styled';
 
 interface Props {
-  onClick?: () => void;
+  onClick: () => void;
   children: ReactNode;
+  disabled: boolean;
 }
 
-const PaginationButton: FC<Props> = ({onClick, children}) => {
+const PaginationButton: FC<Props> = ({onClick, children, disabled = false}) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} disabled={disabled}>
       {children}
     </Button>
   );

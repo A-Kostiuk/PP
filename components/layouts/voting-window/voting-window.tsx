@@ -1,10 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { ActionButton, Img, VotingActionsList } from './styled';
 import { SharedSvgIcons } from '../../ui/shared-svg-icons/shared-svg-icons';
 import { Li } from '../../styled';
 import { useCustomDispatch, useCustomSelector } from '../../../hooks/store';
 import { selectVoting } from '../../../store/selectors';
-import { dislike, favorite, fetchVotingPicture, like } from '../../../store/voting-slice/voting-slice';
+import { dislike, favorite, fetchPicture, like } from '../../../store/voting-slice/voting-slice';
 import { throttle } from 'throttle-typescript';
 import Loader from '../../ui/loader/loader';
 
@@ -18,11 +18,6 @@ const VotingWindow: FC = () => {
   const dispatch = useCustomDispatch();
   const votingPicture = useCustomSelector(selectVoting).votingPicture;
   const isLoading = useCustomSelector(selectVoting).isLoading;
-
-  useEffect(() => {
-    if (!votingPicture.id) dispatch(fetchVotingPicture());
-  }, []);
-
 
   const votingActions: VotingAction[] = [
     {

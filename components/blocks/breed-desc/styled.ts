@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { P } from '../../styled';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Wrapper = styled.div`
   margin-top: 50px;
@@ -55,18 +55,14 @@ export const DescWrapper = styled.div`
   display: flex;
 `;
 
-export const Img = styled.img`
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+export const SwiperSlideStyled = styled(SwiperSlide)`
   border-radius: 20px;
-
+  overflow: hidden;
 `;
 
 export const StyledSwiper = styled(Swiper)`
+  width: 100%;
   height: 360px;
-  border-radius: 20px;
 
 
   .swiper-pagination {

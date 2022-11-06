@@ -1,22 +1,22 @@
 import React, { FC } from 'react';
-import { CSSProperties } from '@emotion/serialize';
-import Select from 'react-select';
+import Select, { SingleValue, StylesConfig } from 'react-select';
 import { Label } from './styled';
 import useDarkMode from 'use-dark-mode';
 import { lightTheme } from '../../../theme/light';
 import { darkTheme } from '../../../theme/dark';
+import { SelectOption } from '../../../interfaces/select-option';
 
 interface Props {
-  options?: string[];
-  defaultValue?: string;
-  onChange?: () => void;
+  options: SelectOption[];
+  onChange?: (newValue: SingleValue<any>) => void;
   label: string;
+  value: SelectOption;
 }
 
-const GalleryCustomSelect: FC<Props> = ({options = [], onChange, defaultValue, label}) => {
+const GalleryCustomSelect: FC<Props> = ({options = [], onChange, label, value}) => {
   const isDarkMode = useDarkMode().value;
-  const customStyles = {
-    control: (provided: CSSProperties, state: any) => ({
+  const customStyles: StylesConfig = {
+    control: (provided, state) => ({
       ...provided,
       width: '100%',
       backgroundColor: isDarkMode ? darkTheme.colors.primaryBackground : lightTheme.colors.primaryBackground,
@@ -29,11 +29,11 @@ const GalleryCustomSelect: FC<Props> = ({options = [], onChange, defaultValue, l
         boxShadow: `inset 0 0 0 2px ${isDarkMode ? darkTheme.colors.primary : lightTheme.colors.primary}`,
       },
     }),
-    valueContainer: (provided: CSSProperties) => ({
+    valueContainer: (provided) => ({
       ...provided,
       paddingRight: '0',
     }),
-    input: (provided: CSSProperties) => ({
+    input: (provided) => ({
       ...provided,
       color: isDarkMode ? darkTheme.colors.text : lightTheme.colors.text,
     }),
@@ -45,7 +45,7 @@ const GalleryCustomSelect: FC<Props> = ({options = [], onChange, defaultValue, l
       <Select options={options}
               styles={customStyles}
               onChange={onChange}
-              defaultValue={defaultValue}
+              value={value}
               instanceId="long-value-select"
               components={{
                 IndicatorSeparator: () => null,

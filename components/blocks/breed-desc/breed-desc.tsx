@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import Image from 'next/image';
+
 import { Breed } from '../../../interfaces/breed';
 import {
-  Img,
   Wrapper,
   DescWrapper,
   DescDetails,
@@ -9,9 +10,9 @@ import {
   DescTitle,
   BreedTitle,
   Container,
-  BreedSubtitle, StyledSwiper, NoInformation,
+  BreedSubtitle, StyledSwiper, NoInformation, SwiperSlideStyled,
 } from './styled';
-import { SwiperSlide } from 'swiper/react';
+
 import { Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -47,7 +48,7 @@ const BreedDesc: FC<Props> = ({breed}) => {
 
   if (!id) {
     return (<NoInformation>
-      Sorry, we haven't got any information about this breed.
+      Sorry, we haven`&apos;t got any information about this breed.
     </NoInformation>);
   }
   return (
@@ -63,8 +64,8 @@ const BreedDesc: FC<Props> = ({breed}) => {
           clickable: true,
         }}
       >
-        {images.map(image => <SwiperSlide key={image.id}><Img src={image.url} width={640}
-                                                              height={360} /></SwiperSlide>)}
+        {images.map(image => <SwiperSlideStyled key={image.id}><Image src={image.url} layout={'fill'}
+                                                                      objectFit={'cover'} /></SwiperSlideStyled>)}
       </StyledSwiper>
       <Wrapper>
         <BreedTitle>{name}</BreedTitle>

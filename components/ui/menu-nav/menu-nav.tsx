@@ -3,14 +3,12 @@ import { Li, Ul } from '../../styled';
 import Link from 'next/link';
 import { SharedSvgIcons } from '../shared-svg-icons/shared-svg-icons';
 import { AppRoutes } from '../../../const';
-import { NavLink, NavList } from './styled';
+import { NavList } from './styled';
+import { IMenuLink } from '../../../interfaces/menu-link';
+import MenuLink from '../menu-link/menu-link';
 
-interface ILink {
-  iconId: string;
-  path: string;
-}
 
-const navigation: ILink[] = [
+const navigation: IMenuLink[] = [
   {
     iconId: 'like',
     path: AppRoutes.LIKES,
@@ -23,7 +21,6 @@ const navigation: ILink[] = [
   {
     iconId: 'dislike',
     path: AppRoutes.DISLIKES,
-
   },
 ];
 
@@ -31,11 +28,7 @@ const MenuNav: FC = () => {
   return (
     <NavList>
       {navigation.map((link) => <Li key={link.path}>
-        <Link href={link.path}>
-          <NavLink>
-            <SharedSvgIcons width={30} height={30} id={link.iconId} />
-          </NavLink>
-        </Link>
+        <MenuLink {...link} />
       </Li>)}
     </NavList>
   );

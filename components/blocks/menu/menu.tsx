@@ -4,11 +4,7 @@ import Search from '../../ui/search/search';
 import MenuNav from '../../ui/menu-nav/menu-nav';
 import { StyledMenu } from './styled';
 
-interface Props {
-
-}
-
-const Menu: FC<Props> = (props) => {
+const Menu: FC = () => {
   return (
     <StyledMenu>
       <BurgerMenu />

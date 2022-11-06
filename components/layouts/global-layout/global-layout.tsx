@@ -20,7 +20,7 @@ const GlobalLayout: FC<Props> = ({children, isHomePage = false}) => {
           <Logo />
           <Meow>Meow!</Meow>
           <Title>Welcome to PetProject</Title>
-          <Text>Let's start</Text>
+          <Text>Let`&apos;s start</Text>
           <MainNav />
         </LeftColumn>
         <RightColumn $isHomePage={isHomePage}>

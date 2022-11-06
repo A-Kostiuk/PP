@@ -1,21 +1,18 @@
 import { SelectOption } from './select-option';
+import { Image } from './image';
 
-interface BreedImage {
-  id: string;
-  url: string;
-}
 
 export interface BreedRequest {
   id: string;
   name: string;
-  image: BreedImage;
+  image: Image;
 }
 
 export interface BreedOption extends BreedRequest, SelectOption {
 }
 
 export interface Breed {
-  images: BreedImage[];
+  images: Image[];
   temperament: string;
   origin: string;
   weight: { metric: string };

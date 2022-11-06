@@ -19,6 +19,7 @@ export const DisplayPanel = styled.div`
 `;
 
 export const Pagination = styled.div`
+  margin-top: 10px;
   display: flex;
   gap: 20px;
   justify-content: center;

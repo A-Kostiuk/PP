@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ActionLog } from '../../interfaces/actionLog';
 import TheCatApi from '../../axios/the-cat-api';
-import { VotingPicture } from '../../interfaces/voting-picture';
 import dayjs from 'dayjs';
 import { AppDispatch } from '../index';
+import { Image } from '../../interfaces/image';
+
 
 interface IInitialState {
-  votingPicture: VotingPicture,
+  votingPicture: Image,
   actionLogs: ActionLog[],
   isLoading: boolean
 }
@@ -20,10 +21,10 @@ const initialState: IInitialState = {
   isLoading: false,
 };
 
-export const fetchVotingPicture = createAsyncThunk<VotingPicture, void>(
+export const fetchPicture = createAsyncThunk<Image, void>(
   'voting/fetchPicture',
   async () => {
-    const res = await TheCatApi.voting.fetchVotingPicture();
+    const res = await TheCatApi.image.fetchImage();
     return res.data[0];
   },
 );
@@ -43,7 +44,7 @@ export const like = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
       from: 'Likes',
     };
     dispatch(addActionLog(actionLog));
-    dispatch(fetchVotingPicture());
+    dispatch(fetchPicture());
   },
 );
 
@@ -62,14 +63,14 @@ export const dislike = createAsyncThunk<void, string, { dispatch: AppDispatch }>
       from: 'Dislikes',
     };
     dispatch(addActionLog(actionLog));
-    dispatch(fetchVotingPicture());
+    dispatch(fetchPicture());
   },
 );
 
 export const favorite = createAsyncThunk<void, string, { dispatch: AppDispatch }>(
   'voting/favorite',
   async (id, {dispatch}) => {
-    await TheCatApi.voting.postFavorite({
+    await TheCatApi.favorite.addToFavorites({
       image_id: id,
       sub_id: 'AndriyKostiuk',
     });
@@ -80,7 +81,7 @@ export const favorite = createAsyncThunk<void, string, { dispatch: AppDispatch }
       from: 'Favorites',
     };
     dispatch(addActionLog(actionLog));
-    dispatch(fetchVotingPicture());
+    dispatch(fetchPicture());
   },
 );
 
@@ -99,10 +100,10 @@ const votingSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchVotingPicture.pending, (state) => {
+    builder.addCase(fetchPicture.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchVotingPicture.fulfilled, (state, action: PayloadAction<VotingPicture>) => {
+    builder.addCase(fetchPicture.fulfilled, (state, action: PayloadAction<Image>) => {
       state.isLoading = false;
       state.votingPicture = action.payload;
     });

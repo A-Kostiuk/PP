@@ -88,6 +88,7 @@ export const RightColumn = styled.div<IColumn>`
             };
           ` : css`
             display: flex;
+            position: relative;
             flex-direction: column;
             gap: 10px;
             height: 100%;

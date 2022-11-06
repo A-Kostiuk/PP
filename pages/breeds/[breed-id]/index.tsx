@@ -1,27 +1,21 @@
-import React, { FC, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { GetServerSideProps, NextPage } from 'next';
+import React from 'react';
 
 import GlobalLayout from '../../../components/layouts/global-layout/global-layout';
 import Menu from '../../../components/blocks/menu/menu';
 import { Section } from '../../../components/styled';
 import Breadcrumbs from '../../../components/ui/breadcrumbs/breadcrumbs';
 import BreedDesc from '../../../components/blocks/breed-desc/breed-desc';
-import { useCustomDispatch, useCustomSelector } from '../../../hooks/store';
+import { useCustomSelector } from '../../../hooks/store';
 import { selectBreed } from '../../../store/selectors';
 import { fetchBreed } from '../../../store/breed-slice/breed-slice';
 import Loader from '../../../components/ui/loader/loader';
+import { wrapper } from '../../../store';
 
-const Index: FC = () => {
-  const dispatch = useCustomDispatch();
+
+const Index: NextPage = () => {
   const currentBreed = useCustomSelector(selectBreed).currentBreed;
   const isLoading = useCustomSelector(selectBreed).isLoading;
-  const router = useRouter();
-  const breedId = router.query['breed-id'];
-
-  useEffect(() => {
-    if (breedId) dispatch(fetchBreed(breedId));
-  }, [breedId]);
-
 
   return (
     <GlobalLayout>
@@ -35,3 +29,12 @@ const Index: FC = () => {
 };
 
 export default Index;
+
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store =>
+  async ({query}) => {
+    const breedId = query['breed-id'];
+    if (breedId) await store.dispatch(fetchBreed(breedId));
+    return {
+      props: {},
+    };
+  });

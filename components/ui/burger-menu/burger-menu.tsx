@@ -1,13 +1,25 @@
-import React, { FC } from 'react';
-import { Button } from './styled';
+import React, { FC, useState } from 'react';
+import { OpeningButton, OpenedMenu } from './styled';
+import MainNav from '../main-nav/main-nav';
+import ClosingButton from '../closing-button/closing-button';
 
-interface Props {
+const BurgerMenu: FC = () => {
+  const [isOpened, setIsOpened] = useState<boolean>(false);
 
-}
+  const handleOpeningButtonOnClick = () => {
+    setIsOpened(true);
+  };
+  const handleClosingButtonOnClick = () => {
+    setIsOpened(false);
+  };
 
-const BurgerMenu: FC<Props> = (props) => {
-  return (
-    <Button aria-label='Відкрити меню'/>
+  return (<>
+      <OpeningButton onClick={handleOpeningButtonOnClick} aria-label="Open menu" />
+      {isOpened && <OpenedMenu>
+        <ClosingButton onClick={handleClosingButtonOnClick} ariaLabel={'Close menu'} btnSize={60} imgSize={26} />
+        <MainNav />
+      </OpenedMenu>}
+    </>
   );
 };
 

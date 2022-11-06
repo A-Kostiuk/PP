@@ -4,11 +4,8 @@ import LinkCard from '../link-card/link-card';
 import votingImage from '../../../public/navigation/voting.png';
 import breedsImage from '../../../public/navigation/breeds.png';
 import galleryImage from '../../../public/navigation/gallery.png';
-import { LinksList, NavItem } from './styled';
-
-interface Props {
-
-}
+import { LinksList, Nav } from './styled';
+import { Li } from '../../styled';
 
 interface ILink {
   title: string;
@@ -16,7 +13,7 @@ interface ILink {
   path: string;
 }
 
-const MainNav: FC<Props> = () => {
+const MainNav: FC = () => {
   const navigation: ILink[] = [
     {
       title: 'Voting',
@@ -36,13 +33,13 @@ const MainNav: FC<Props> = () => {
   ];
 
   return (
-    <nav>
+    <Nav>
       <LinksList>
-        {navigation.map((link) => <NavItem key={link.path}>
+        {navigation.map((link) => <Li key={link.path}>
           <LinkCard title={link.title} image={link.image} path={link.path} />
-        </NavItem>)}
+        </Li>)}
       </LinksList>
-    </nav>
+    </Nav>
   );
 };
 

@@ -12,7 +12,7 @@ const VotingLogsList: FC = () => {
         {votingLogsList.length ? votingLogsList.map((log) => (
             <VotingLog key={log.imageId} {...log} />
           )) :
-          <NoLogs>You haven't got any logs yet.</NoLogs>
+          <NoLogs>You haven`&apos;t got any logs yet.</NoLogs>
         }
       </LogsList>
     </Wrapper>

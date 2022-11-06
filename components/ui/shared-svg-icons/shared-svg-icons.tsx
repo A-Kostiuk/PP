@@ -59,11 +59,11 @@ export const SharedSvgIcons: FC<Props> = ({width, id, height}) => {
       </svg>;
     case 'loader':
       return <svg width={width} height={height} viewBox="0 0 38 38">
-          <linearGradient id="a" x1="8%" x2="65.7%" y1="0%" y2="23.9%">
-            <stop offset="0%" stopColor="#000" stopOpacity="0" />
-            <stop offset="63.1%" stopColor="#000" stopOpacity=".6" />
-            <stop offset="100%" stopColor="#000" />
-          </linearGradient>
+        <linearGradient id="a" x1="8%" x2="65.7%" y1="0%" y2="23.9%">
+          <stop offset="0%" stopColor="#000" stopOpacity="0" />
+          <stop offset="63.1%" stopColor="#000" stopOpacity=".6" />
+          <stop offset="100%" stopColor="#000" />
+        </linearGradient>
         <g fill="none" fillRule="evenodd" transform="translate(1 1)">
           <path stroke="url(#a)" strokeWidth="2" d="M36 18C36 8 28 0 18 0">
             <animateTransform attributeName="transform" dur="0.9s" from="0 18 18" repeatCount="indefinite"
@@ -74,6 +74,27 @@ export const SharedSvgIcons: FC<Props> = ({width, id, height}) => {
                               to="360 18 18" type="rotate" />
           </circle>
         </g>
+      </svg>;
+    case 'close' :
+      return <svg width={width} height={height} fill="none" viewBox="0 0 26 26">
+        <path fill="#FF868E"
+              d="M11.6 13 .3 1.7 1.7.3 13 11.6 24.3.3l1.4 1.4L14.4 13l11.3 11.3-1.4 1.4L13 14.4 1.7 25.7.3 24.3 11.6 13Z" />
+      </svg>;
+    case 'uploadBg' :
+      return <svg width={width} height={height} fill="none" viewBox="0 0 200 200">
+        <path fill="#F8F8F7" d="M140 40a20 20 0 1 0 0 40 20 20 0 0 0 0-40Z" />
+        <path fill="#F8F8F7" fillRule="evenodd"
+              d="M0 20C0 9 9 0 20 0h160c11 0 20 9 20 20v160a20.1 20.1 0 0 1-2.4 9.5A20 20 0 0 1 180 200H20c-11 0-20-9-20-20V20Zm64.7 21.9L60 37.2 13.3 84V20c0-3.7 3-6.7 6.7-6.7h160c3.7 0 6.7 3 6.7 6.7v113.3H156L64.7 42v-.1Z" />
+      </svg>;
+    case 'check':
+      return <svg width={width} height={height} fill="none" viewBox="0 0 20 20">
+        <path fill="#97EAB9"
+              d="M0 10a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm10-8.67a8.67 8.67 0 1 0 0 17.34 8.67 8.67 0 0 0 0-17.34Zm5.19 5.75-5.76 7.2-4.52-3.77.85-1.02 3.48 2.9 4.9-6.14 1.05.83Z" />
+      </svg>;
+    case 'cross':
+      return <svg width={width} height={height} fill="none" viewBox="0 0 20 20">
+        <path fill="#FF868E"
+              d="M0 10a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm10-8.67a8.67 8.67 0 1 0 0 17.34 8.67 8.67 0 0 0 0-17.34ZM9.06 10 5.53 6.47l.94-.94L10 9.06l3.53-3.53.94.94L10.94 10l3.53 3.53-.94.94L10 10.94l-3.53 3.53-.94-.94L9.06 10Z" />
       </svg>;
     default:
       return null;

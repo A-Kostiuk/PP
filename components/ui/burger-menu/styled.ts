@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
-
+export const OpeningButton = styled.button`
   display: block;
   position: relative;
   width: 60px;
@@ -10,6 +9,7 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 20px;
+  transition: .3s;
 
   &&:before {
     content: '';
@@ -39,6 +39,24 @@ export const Button = styled.button`
     background-color: ${({theme}) => theme.colors.baseWhite};
     box-shadow: 0 8px 0 0 ${({theme}) => theme.colors.baseWhite}, 0 16px 0 0 ${({theme}) => theme.colors.baseWhite};
   }
+
+  @media (min-width: ${props => props.theme.viewports.laptopWidth}) {
+    display: none;
+  }
+`;
+
+export const OpenedMenu = styled.div`
+  position: fixed;
+  padding: 30px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: ${({theme}) => theme.colors.appBackground};
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   @media (min-width: ${props => props.theme.viewports.laptopWidth}) {
     display: none;

@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { PhotosPatternStyled, Wrapper } from './styled';
+import { Container, PhotosPatternStyled, Wrapper } from './styled';
 
 interface Props {
   children: ReactNode;
@@ -8,9 +8,11 @@ interface Props {
 const PhotosPattern: FC<Props> = ({children}) => {
   return (
     <Wrapper>
-      <PhotosPatternStyled>
-        {children}
-      </PhotosPatternStyled>
+      <Container>
+        <PhotosPatternStyled>
+          {children}
+        </PhotosPatternStyled>
+      </Container>
     </Wrapper>
   );
 };

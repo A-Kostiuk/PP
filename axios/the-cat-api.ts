@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { IPostFavorite, IPostVoting } from '../interfaces/the-cat-api';
+import { Image, VotingImage } from '../interfaces/image';
+import { FavoriteImage } from '../interfaces/favorite';
+import { BreedRequest } from '../interfaces/breed';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -16,23 +19,25 @@ api.interceptors.request.use(config => {
 
 
 const TheCatApi = {
-  voting: {
-    fetchVotingPicture: () => {
-      return api.get('/images/search');
+  image: {
+    fetchImage: () => {
+      return api.get<Image[]>('/images/search');
     },
+    uploadImage: (data: FormData) => {
+      return api.post('/images/upload', data, {headers: {'Content-Type': 'multipart/form-data'}});
+    },
+  },
+  voting: {
     postVoting: (data: IPostVoting) => {
       return api.post('/votes', data);
     },
-    postFavorite: (data: IPostFavorite) => {
-      return api.post('/favourites', data);
+    fetchVotingImages: () => {
+      return api.get<VotingImage[]>('/votes');
     },
   },
   breeds: {
-    fetchCurrentBreeds: (limit: number | string, page: number | string) => {
-      return api.get(`/breeds?limit=${limit}&page=${page}`);
-    },
     fetchAllBreeds: () => {
-      return api.get('/breeds');
+      return api.get<BreedRequest[]>('/breeds');
     },
   },
   breed: {
@@ -43,7 +48,26 @@ const TheCatApi = {
       return api.get(`/images/search?limit=5&breed_ids=${breedId}`);
     },
   },
-
+  gallery: {
+    fetchPictures: (limit: number | string, type: number | string, breed: number | string, order: number | string) => {
+      if (breed === 'none') {
+        return api.get<Image[]>(`/images/search?limit=${limit}&mime_types=${type}&order=${order}`);
+      } else {
+        return api.get<Image[]>(`/images/search?limit=${limit}&mime_types=${type}&order=${order}&breed_ids=${breed}`);
+      }
+    },
+  },
+  favorite: {
+    fetchFavorites: () => {
+      return api.get<FavoriteImage[]>('/favourites');
+    },
+    addToFavorites: (data: IPostFavorite) => {
+      return api.post('/favourites', data);
+    },
+    removeFromFavorites: (id: number | string) => {
+      return api.delete(`/favourites/${id}`);
+    },
+  },
 };
 
 export default TheCatApi;

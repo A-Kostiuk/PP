@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import Select, { SingleValue } from 'react-select';
-import { CSSProperties } from '@emotion/serialize';
+import Select, { SingleValue, StylesConfig } from 'react-select';
 import { darkTheme } from '../../../theme/dark';
 import { lightTheme } from '../../../theme/light';
 import useDarkMode from 'use-dark-mode';
@@ -12,18 +11,32 @@ interface Props {
   value: SelectOption | null;
   placeholder?: string;
   isClearable?: boolean;
+  flexGrow?: number;
+  minWidth?: number;
 }
 
-const BreedsCustomSelect: FC<Props> = ({options, onChange, value, placeholder, isClearable = false}) => {
+const BreedsCustomSelect: FC<Props> = ({
+                                         options,
+                                         onChange,
+                                         value,
+                                         placeholder,
+                                         isClearable = false,
+                                         flexGrow = 1,
+                                         minWidth = 110,
+                                       }) => {
   const isDarkMode = useDarkMode().value;
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  const customStyles = {
-    control: (provided: CSSProperties, state: any) => ({
+  const customStyles: StylesConfig = {
+    control: (provided, state) => ({
       ...provided,
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
       backgroundColor: theme.colors.breedsControlBg,
       color: theme.colors.text,
-      width: '100%',
       borderRadius: '10px',
       border: 'none',
       height: '40px',
@@ -32,15 +45,18 @@ const BreedsCustomSelect: FC<Props> = ({options, onChange, value, placeholder, i
         boxShadow: 'inset 0 0 0 2px #FBE0DC;',
       },
     }),
-    container: (provided: CSSProperties) => ({
+    container: (provided) => ({
       ...provided,
-      flexGrow: '2',
+      flexGrow: flexGrow,
+      position: 'relative',
+      minWidth: `${minWidth}px`,
+      height: '40px',
     }),
-    valueContainer: (provided: CSSProperties) => ({
+    valueContainer: (provided) => ({
       ...provided,
       paddingRight: '0',
     }),
-    input: (provided: CSSProperties) => ({
+    input: (provided) => ({
       ...provided,
       color: theme.colors.text,
     }),
