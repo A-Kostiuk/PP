@@ -1,36 +1,36 @@
-import { NextPage } from 'next';
-import React, { useEffect } from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import React from 'react';
 
 import GlobalLayout from '../../components/layouts/global-layout/global-layout';
 import Menu from '../../components/blocks/menu/menu';
 import { Section } from '../../components/styled';
 import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import PhotosPattern from '../../components/layouts/photos-pattern/photos-pattern';
-import { useCustomDispatch, useCustomSelector } from '../../hooks/store';
+import { useCustomSelector } from '../../hooks/store';
 import { selectFavorites } from '../../store/selectors';
-import Image from '../../components/ui/image/image';
-import { fetchFavoritesImages } from '../../store/favourites-slice/favourites-slice';
+import CustomImageItem from '../../components/ui/custom-image-item/custom-image-item';
+import { fetchFavoritesImages } from '../../store/favorites-slice/favorites-slice';
 import NoItem from '../../components/ui/no-item/no-item';
+import { wrapper } from '../../store';
+import Head from 'next/head';
 
 
 const Index: NextPage = () => {
-  const dispatch = useCustomDispatch();
-  useEffect(() => {
-    dispatch(fetchFavoritesImages());
-  }, [dispatch]);
+  const {images} = useCustomSelector(selectFavorites);
 
-
-  const images = useCustomSelector(selectFavorites).images;
   return (
     <GlobalLayout>
+      <Head>
+        <title>Favorites</title>
+      </Head>
       <Menu />
       <Section>
         <Breadcrumbs marginBottom={20} />
         {images.length > 0 ?
           <PhotosPattern>
-            {images.map((image, index) => <Image index={index} key={image.image.id}
-                                                 isFavorite={image.isFavorite} {...image.image}
-                                                 favoriteId={image.id} type={'favorites'} />)}
+            {images.map((image, index) => <CustomImageItem index={index} key={image.image.id}
+                                                           isFavorite={image.isFavorite} {...image.image}
+                                                           favoriteId={image.id} type={'favorites'} />)}
           </PhotosPattern>
           : <NoItem />}
       </Section>
@@ -39,3 +39,10 @@ const Index: NextPage = () => {
 };
 
 export default Index;
+
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store => async () => {
+  await store.dispatch(fetchFavoritesImages());
+  return {
+    props: {},
+  };
+});

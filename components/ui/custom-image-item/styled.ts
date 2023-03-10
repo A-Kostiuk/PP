@@ -16,7 +16,7 @@ export const FavoriteButton = styled.button<IFavoriteButton>`
   border: none;
   width: 40px;
   height: 40px;
-  background-color: ${({theme}) => theme.colors.btnBackground};
+  background-color: ${({theme}) => theme.colors.grey100};
   cursor: pointer;
   border-radius: 10px;
   background-repeat: no-repeat;

@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ActionLog } from '../../interfaces/actionLog';
 import TheCatApi from '../../axios/the-cat-api';
 import dayjs from 'dayjs';
 import { AppDispatch } from '../index';
 import { Image } from '../../interfaces/image';
+import { HYDRATE } from 'next-redux-wrapper';
 
 
 interface IInitialState {
@@ -102,11 +103,17 @@ const votingSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPicture.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(fetchPicture.fulfilled, (state, action: PayloadAction<Image>) => {
-      state.isLoading = false;
-      state.votingPicture = action.payload;
-    });
+    })
+      .addCase(fetchPicture.fulfilled, (state, action: PayloadAction<Image>) => {
+        state.isLoading = false;
+        state.votingPicture = action.payload;
+      })
+      .addCase(HYDRATE, (state, action: AnyAction) => {
+        return {
+          ...state,
+          ...action.payload.voting,
+        };
+      });
   },
 });
 

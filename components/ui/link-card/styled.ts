@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { P } from '../../styled';
+import Link from 'next/link';
 
 export const Title = styled(P)`
   text-transform: uppercase;

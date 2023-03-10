@@ -9,11 +9,15 @@ import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import VotingWindow from '../../components/layouts/voting-window/voting-window';
 import VotingLogsList from '../../components/layouts/voting-logs-list/voting-logs-list';
 import { wrapper } from '../../store';
+import Head from 'next/head';
 
 
 const Index: NextPage = () => {
   return (
     <GlobalLayout>
+      <Head>
+        <title>Voting</title>
+      </Head>
       <Menu />
       <Section>
         <Breadcrumbs marginBottom={20} />

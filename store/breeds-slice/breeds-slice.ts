@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BreedOption, BreedRequest } from '../../interfaces/breed';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { BreedOption, BreedResponse } from '../../interfaces/breed';
 import theCatApi from '../../axios/the-cat-api';
 import { SelectOption } from '../../interfaces/select-option';
+import { HYDRATE } from 'next-redux-wrapper';
 
 interface Breeds {
   currentBreeds: BreedOption[];
@@ -23,7 +24,7 @@ export const fetchAllBreeds = createAsyncThunk<BreedOption[], void>(
   'breeds/fetchAllBreeds',
   async () => {
     const req = await theCatApi.breeds.fetchAllBreeds();
-    return req.data.map((breed: BreedRequest) => ({value: breed.id, label: breed.name, ...breed}));
+    return req.data.map((breed: BreedResponse) => ({value: breed.id, label: breed.name, ...breed}));
   },
 );
 
@@ -74,7 +75,13 @@ const breedsSlice = createSlice({
     builder.addCase(fetchAllBreeds.fulfilled, (state, action) => {
       state.allBreeds = action.payload;
       state.currentBreeds = action.payload.slice(0, Number(state.limit.value));
-    });
+    })
+      .addCase(HYDRATE, (state, action: AnyAction) => {
+        return {
+          ...state,
+          ...action.payload.breeds,
+        };
+      });
   }),
 });
 

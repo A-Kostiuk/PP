@@ -36,8 +36,8 @@ export const OpeningButton = styled.button`
 export const UploadMenu = styled.div`
   position: absolute;
   z-index: 1000;
+  min-height: 100%;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
   padding: 20px;

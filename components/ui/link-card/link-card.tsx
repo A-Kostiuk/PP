@@ -19,8 +19,8 @@ const LinkCard: FC<Props> = ({image, title, path}) => {
   }, [title, router]);
 
   return (
-    <Link href={path}>
-      <Card $image={image} $title={title} $isActive={active}>
+    <Link href={path} passHref>
+      <Card href={path} $image={image} $title={title} $isActive={active}>
         <Title>{title}</Title>
       </Card>
     </Link>

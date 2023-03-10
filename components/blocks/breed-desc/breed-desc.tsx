@@ -18,11 +18,17 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 interface Props {
-  breed: Breed;
+  breed: Breed | null;
 }
 
 const BreedDesc: FC<Props> = ({breed}) => {
-  const {temperament, origin, weight, life_span, images, name, id} = breed;
+  if (!breed) {
+    return (<NoInformation>
+      Sorry, we haven`&apos;t got any information about this breed.
+    </NoInformation>);
+  }
+
+  const {temperament, origin, weight, life_span, images, name} = breed;
 
   const leftColumn = [
     {
@@ -46,11 +52,7 @@ const BreedDesc: FC<Props> = ({breed}) => {
     },
   ];
 
-  if (!id) {
-    return (<NoInformation>
-      Sorry, we haven`&apos;t got any information about this breed.
-    </NoInformation>);
-  }
+
   return (
     <>
       <StyledSwiper
@@ -64,7 +66,7 @@ const BreedDesc: FC<Props> = ({breed}) => {
           clickable: true,
         }}
       >
-        {images.map(image => <SwiperSlideStyled key={image.id}><Image src={image.url} layout={'fill'}
+        {images.map(image => <SwiperSlideStyled key={image.id}><Image src={image.url} layout={'fill'} alt={''}
                                                                       objectFit={'cover'} /></SwiperSlideStyled>)}
       </StyledSwiper>
       <Wrapper>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import BurgerMenu from '../../ui/burger-menu/burger-menu';
-import Search from '../../ui/search/search';
+import Search from '../search/search';
 import MenuNav from '../../ui/menu-nav/menu-nav';
 import { StyledMenu } from './styled';
 

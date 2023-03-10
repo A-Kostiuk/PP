@@ -19,7 +19,7 @@ const Breadcrumbs: FC<Props> = ({marginBottom}) => {
   return (
     <BreadcrumbsList $marginBottom={marginBottom}>
       <Li>
-        <PreviousPage onClick={handlePreviousPageClick}>
+        <PreviousPage onClick={handlePreviousPageClick} aria-label={'Come back'}>
           <SharedSvgIcons width={20} height={20} id="arrowBack" />
         </PreviousPage>
       </Li>

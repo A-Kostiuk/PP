@@ -62,3 +62,10 @@ export const OpenedMenu = styled.div`
     display: none;
   }
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+`;

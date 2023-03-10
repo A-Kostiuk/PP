@@ -3,6 +3,7 @@ import { P } from '../../styled';
 
 export const StyledLogo = styled.a`
   display: flex;
+  width: max-content;
   align-items: center;
   cursor: pointer;
 `;
@@ -23,4 +24,5 @@ export const Icon = styled.div`
 export const Text = styled(P)`
   font-weight: 700;
   font-size: 16px;
+  color: ${({theme}) => theme.colors.text};
 `;

@@ -2,13 +2,13 @@ import { SelectOption } from './select-option';
 import { Image } from './image';
 
 
-export interface BreedRequest {
+export interface BreedResponse {
   id: string;
   name: string;
   image: Image;
 }
 
-export interface BreedOption extends BreedRequest, SelectOption {
+export interface BreedOption extends BreedResponse, SelectOption {
 }
 
 export interface Breed {

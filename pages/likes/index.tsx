@@ -10,6 +10,7 @@ import { VotingImage } from '../../interfaces/image';
 import PhotosPattern from '../../components/layouts/photos-pattern/photos-pattern';
 import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import { PhotoItem } from '../../components/ui/photo-item/photo-item';
+import Head from 'next/head';
 
 interface LikesPageProps {
   images: VotingImage[];
@@ -18,6 +19,9 @@ interface LikesPageProps {
 const Index: NextPage<LikesPageProps> = ({images}) => {
   return (
     <GlobalLayout>
+      <Head>
+        <title>Likes</title>
+      </Head>
       <Menu />
       <Section>
         <Breadcrumbs marginBottom={20} />

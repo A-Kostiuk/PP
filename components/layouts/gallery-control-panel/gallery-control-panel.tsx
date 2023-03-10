@@ -1,15 +1,21 @@
 import React, { FC, FormEvent } from 'react';
-
-import GalleryCustomSelect from '../../ui/gallery-custom-select/gallery-custom-select';
 import { SharedSvgIcons } from '../../ui/shared-svg-icons/shared-svg-icons';
 import { useCustomDispatch, useCustomSelector } from '../../../hooks/store';
 import { selectGallery } from '../../../store/selectors';
-import { setOrder, setLimit, setType, setBreed, fetchGalleryImages } from '../../../store/gallery-slice/gallery-sliice';
+import { setOrder, setLimit, setType, setBreed, fetchGalleryImages } from '../../../store/gallery-slice/gallery-slice';
 import { SelectOption } from '../../../interfaces/select-option';
 import { Form, SubmitButton, SubmitWrapper } from './styled';
+import GallerySelectItem from '../../ui/gallery-select-item/gallery-select-item';
 
 interface GalleryControlPanelProps {
   breedsList: SelectOption[];
+}
+
+interface IControlItem {
+  title: string;
+  options: SelectOption[];
+  value: SelectOption;
+  onChangeHandler: (newValue: SelectOption) => void;
 }
 
 const GalleryControlPanel: FC<GalleryControlPanelProps> = ({breedsList}) => {
@@ -37,20 +43,36 @@ const GalleryControlPanel: FC<GalleryControlPanelProps> = ({breedsList}) => {
     {value: 20, label: '20 items per page'},
   ];
 
-  const handleSelectOnChange = {
-    order: (newValue: SelectOption) => {
+  const controlItems: IControlItem[] = [{
+    title: 'order',
+    options: orderOptions,
+    value: order,
+    onChangeHandler: (newValue) => {
       dispatch(setOrder(newValue));
     },
-    type: (newValue: SelectOption) => {
+  }, {
+    title: 'type',
+    options: typeOptions,
+    value: type,
+    onChangeHandler: (newValue) => {
       dispatch(setType(newValue));
     },
-    limit: (newValue: SelectOption) => {
-      dispatch(setLimit(newValue));
-    },
-    breed: (newValue: SelectOption) => {
+  }, {
+    title: 'breed',
+    options: breedsList,
+    value: breed,
+    onChangeHandler: (newValue) => {
       dispatch(setBreed(newValue));
     },
-  };
+  }, {
+    title: 'limit',
+    options: limitOptions,
+    value: limit,
+    onChangeHandler: (newValue) => {
+      dispatch(setLimit(newValue));
+    },
+  }];
+
 
   const handleFormOnSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -59,16 +81,20 @@ const GalleryControlPanel: FC<GalleryControlPanelProps> = ({breedsList}) => {
 
   return (
     <Form onSubmit={handleFormOnSubmit}>
-      <GalleryCustomSelect label={'Order'} options={orderOptions} onChange={handleSelectOnChange.order} value={order} />
-      <GalleryCustomSelect label={'Type'} options={typeOptions} onChange={handleSelectOnChange.type} value={type} />
-      <GalleryCustomSelect label={'Breed'} options={breedsList} value={breed} onChange={handleSelectOnChange.breed} />
-      <SubmitWrapper>
-        <GalleryCustomSelect label={'Limit'} options={limitOptions} onChange={handleSelectOnChange.limit}
-                             value={limit} />
-        <SubmitButton aria-label={'Load new photos'}>
-          <SharedSvgIcons width={18} height={20} id={'update'} />
-        </SubmitButton>
-      </SubmitWrapper>
+      {controlItems.map(({title, options, onChangeHandler, value}, index, arr) => {
+        if (index === arr.length - 1) {
+          return <SubmitWrapper key={title}>
+            <GallerySelectItem title={title} options={options} onChange={onChangeHandler}
+                               value={value} bgControl={'secondary'} />
+            <SubmitButton aria-label={'Load new photos'}>
+              <SharedSvgIcons width={18} height={20} id={'update'} />
+            </SubmitButton>
+          </SubmitWrapper>;
+        }
+
+        return <GallerySelectItem key={title} title={title} options={options} onChange={onChangeHandler}
+                                  value={value} bgControl={'secondary'} />;
+      })}
     </Form>
   );
 };

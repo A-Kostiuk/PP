@@ -14,6 +14,7 @@ export const darkTheme: DefaultTheme = {
     btnBackground: 'rgba(255, 134, 142, 0.2)',
     linkBackground: 'rgba(255, 255, 255, 0.1)',
     votingLogBg: 'rgba(255, 255, 255, 0.05)',
-    breedsControlBg: 'rgba(255, 255, 255, 0.05)',
+    breedsControlBgPrimary: 'rgba(255, 255, 255, 0.05)',
+    breedsControlBgSecondary: 'rgba(255, 255, 255, 0.05)',
   },
 };

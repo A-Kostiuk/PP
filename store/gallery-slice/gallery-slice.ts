@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SelectOption } from '../../interfaces/select-option';
 import { AppDispatch, RootState } from '../index';
 import theCatApi from '../../axios/the-cat-api';
 import { GalleryImage, Image } from '../../interfaces/image';
 import { IActionFavoritesProps, IAddToFavoriteReq } from '../../interfaces/favorite';
+import { HYDRATE } from 'next-redux-wrapper';
 
 interface Gallery {
   order: SelectOption;
@@ -91,27 +92,33 @@ const gallerySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchGalleryImages.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(fetchGalleryImages.fulfilled, (state, action) => {
-      state.pictures = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(addToFavorites.fulfilled, (state, action) => {
-      const image = action.payload;
-      if (action.payload) {
-        const currentImage = state.pictures[image!.index];
-        currentImage.isFavorite = true;
-        currentImage.favoriteId = image!.favoriteId;
-      }
-    });
-    builder.addCase(removeFromFavorites.fulfilled, (state, action) => {
-      const index = action.payload;
-      if (index) {
-        const currentImage = state.pictures[index];
-        currentImage.isFavorite = false;
-        currentImage.favoriteId = null;
-      }
-    });
+    })
+      .addCase(fetchGalleryImages.fulfilled, (state, action) => {
+        state.pictures = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        const image = action.payload;
+        if (action.payload) {
+          const currentImage = state.pictures[image!.index];
+          currentImage.isFavorite = true;
+          currentImage.favoriteId = image!.favoriteId;
+        }
+      })
+      .addCase(removeFromFavorites.fulfilled, (state, action) => {
+        const index = action.payload;
+        if (index) {
+          const currentImage = state.pictures[index];
+          currentImage.isFavorite = false;
+          currentImage.favoriteId = null;
+        }
+      })
+      .addCase(HYDRATE, (state, action: AnyAction) => {
+        return {
+          ...state,
+          ...action.payload.gallery,
+        };
+      });
   },
 });
 

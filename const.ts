@@ -6,6 +6,7 @@ interface IAppRoutes {
   LIKES: string;
   FAVORITES: string;
   DISLIKES: string;
+  SEARCH: string;
 }
 
 export const AppRoutes: IAppRoutes = {
@@ -16,4 +17,5 @@ export const AppRoutes: IAppRoutes = {
   LIKES: '/likes',
   FAVORITES: '/favorites',
   DISLIKES: '/dislikes',
+  SEARCH: '/search',
 };

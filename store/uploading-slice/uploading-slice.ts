@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import theCatApi from '../../axios/the-cat-api';
+import { HYDRATE } from 'next-redux-wrapper';
 
 interface Uploading {
   status: boolean | null;
@@ -48,22 +49,28 @@ const uploadingSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(uploadImage.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(uploadImage.fulfilled, (state, action) => {
-      state.isLoading = false;
-      const status = action.payload;
-      state.status = status;
-      if (status) {
-        state.err = '';
-        state.fileName = '';
-        state.srcPreview = '';
-      }
-    });
-    builder.addCase(uploadImage.rejected, (state) => {
-      state.isLoading = false;
-      state.status = false;
-      state.err = 'Something went wrong.';
-    });
+    })
+      .addCase(uploadImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const status = action.payload;
+        state.status = status;
+        if (status) {
+          state.err = '';
+          state.fileName = '';
+          state.srcPreview = '';
+        }
+      })
+      .addCase(uploadImage.rejected, (state) => {
+        state.isLoading = false;
+        state.status = false;
+        state.err = 'Something went wrong.';
+      })
+      .addCase(HYDRATE, (state, action: AnyAction) => {
+        return {
+          ...state,
+          ...action.payload.uploading,
+        };
+      });
   },
 });
 

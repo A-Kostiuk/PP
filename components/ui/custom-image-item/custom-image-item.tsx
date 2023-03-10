@@ -6,12 +6,12 @@ import { useCustomDispatch } from '../../../hooks/store';
 import {
   addToFavorites as addToFavoritesGallery,
   removeFromFavorites as removeFromFavoritesGallery,
-} from '../../../store/gallery-slice/gallery-sliice';
+} from '../../../store/gallery-slice/gallery-slice';
 
 import {
   addToFavorites as addToFavoritesFavorites,
   removeFromFavorites as removeFromFavoritesFavorites,
-} from '../../../store/favourites-slice/favourites-slice';
+} from '../../../store/favorites-slice/favorites-slice';
 
 import { Container, FavoriteButton } from './styled';
 
@@ -24,7 +24,7 @@ interface Props {
   type: 'gallery' | 'favorites';
 }
 
-const Image: FC<Props> = ({url, isFavorite, id, favoriteId, index, type}) => {
+const CustomImageItem: FC<Props> = ({url, isFavorite, id, favoriteId, index, type}) => {
   const dispatch = useCustomDispatch();
   const handleFavoriteButtonOnClick = async () => {
     const removeData = {id: favoriteId!, index};
@@ -44,10 +44,10 @@ const Image: FC<Props> = ({url, isFavorite, id, favoriteId, index, type}) => {
 
   return (
     <Container>
-      <NextImage src={url} alt={''} layout={'fill'} />
+      <NextImage src={url} alt={''} layout={'fill'} priority={false} />
       <FavoriteButton $isFavorite={isFavorite} onClick={handleFavoriteButtonOnClick} />
     </Container>
   );
 };
 
-export default Image;
+export default CustomImageItem;

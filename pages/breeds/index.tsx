@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { wrapper } from '../../store';
 import React from 'react';
 import { SingleValue } from 'react-select';
@@ -17,15 +17,16 @@ import GlobalLayout from '../../components/layouts/global-layout/global-layout';
 import Menu from '../../components/blocks/menu/menu';
 import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import SortButton from '../../components/ui/sort-button/sort-button';
-import BreedsCustomSelect from '../../components/ui/breeds-custom-select/breeds-custom-select';
 import { SelectOption } from '../../interfaces/select-option';
 import PhotosPattern from '../../components/layouts/photos-pattern/photos-pattern';
 import BreedLink from '../../components/ui/breed-link/breed-link';
 import PaginationButton from '../../components/ui/pagination-button/pagination-button';
-import Loader from '../../components/ui/loader/loader';
 import { Li, Section } from '../../components/styled';
 
 import { ControlPanel, DisplayPanel, Pagination } from '../../pages-styles/breeds-page-styled.ts';
+import CustomSelect from '../../components/ui/custom-select/custom-select';
+import HiddenElement from '../../components/ui/hidden-element/hidden-element';
+import Head from 'next/head';
 
 const limitOptions: SelectOption[] = [
   {value: 5, label: 'Limit: 5'},
@@ -74,16 +75,21 @@ const Index: NextPage = () => {
 
   return (
     <GlobalLayout>
+      <Head>
+        <title>Breeds</title>
+      </Head>
       <Menu />
       <Section>
         <ControlPanel>
           <Breadcrumbs />
-          <BreedsCustomSelect options={allBreeds} value={selectBreed} onChange={handleAllBreedsOnChange}
-                              placeholder={'All breeds'} isClearable={true} flexGrow={100} minWidth={150} />
+          <HiddenElement as={'label'} htmlFor="allBreeds">All breeds</HiddenElement>
+          <CustomSelect options={allBreeds} value={selectBreed} onChange={handleAllBreedsOnChange}
+                        placeholder={'All breeds'} isClearable={true} flexGrow={100} minWidth={150} id={'allBreeds'} />
           <DisplayPanel>
-            <BreedsCustomSelect options={limitOptions} value={limit} onChange={handleLimitOnChange} />
-            <SortButton iconId={'sortZA'} handleSortButtonClick={handleSortZAOnClick} />
-            <SortButton iconId={'sortAZ'} handleSortButtonClick={handleSortAZOnClick} />
+            <HiddenElement as={'label'} htmlFor="limit">Limit</HiddenElement>
+            <CustomSelect options={limitOptions} value={limit} onChange={handleLimitOnChange} id={'limit'} />
+            <SortButton iconId={'sortZA'} handleSortButtonClick={handleSortZAOnClick} ariaLabel={'Sort z-a'} />
+            <SortButton iconId={'sortAZ'} handleSortButtonClick={handleSortAZOnClick} ariaLabel={'Sort a-z'} />
           </DisplayPanel>
         </ControlPanel>
         {selectBreed ? <BreedLink breed={selectBreed} /> :
@@ -106,7 +112,7 @@ const Index: NextPage = () => {
 
 export default Index;
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store => async () => {
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(store => async () => {
   await store.dispatch(fetchAllBreeds());
   return {
     props: {},

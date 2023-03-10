@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { FavoriteImage, IActionFavoritesProps, IAddToFavoriteReq } from '../../interfaces/favorite';
 import theCatApi from '../../axios/the-cat-api';
+import { HYDRATE } from 'next-redux-wrapper';
 
 interface Favorites {
   images: FavoriteImage[];
@@ -53,24 +54,30 @@ const favoriteSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchFavoritesImages.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(fetchFavoritesImages.fulfilled, (state, action) => {
-      state.images = action.payload;
-    });
-    builder.addCase(addToFavorites.fulfilled, (state, action) => {
-      if (action.payload) {
-        const {index, favoriteId} = action.payload;
-        state.images[index].isFavorite = true;
-        state.images[index].id = favoriteId;
-      }
-    });
-    builder.addCase(removeFromFavorites.fulfilled, (state, action) => {
-      const index = action.payload;
-      if (index !== null) {
-        state.images[index].isFavorite = false;
-        state.images[index].id = null;
-      }
-    });
+    })
+      .addCase(fetchFavoritesImages.fulfilled, (state, action) => {
+        state.images = action.payload;
+      })
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        if (action.payload) {
+          const {index, favoriteId} = action.payload;
+          state.images[index].isFavorite = true;
+          state.images[index].id = favoriteId;
+        }
+      })
+      .addCase(removeFromFavorites.fulfilled, (state, action) => {
+        const index = action.payload;
+        if (index !== null) {
+          state.images[index].isFavorite = false;
+          state.images[index].id = null;
+        }
+      })
+      .addCase(HYDRATE, (state, action: AnyAction) => {
+        return {
+          ...state,
+          ...action.payload.favorites,
+        };
+      });
   },
 });
 

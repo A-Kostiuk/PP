@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { P } from '../../styled';
 
 export const Form = styled.form`
   background-color: ${({theme}) => theme.colors.appBackground};
@@ -15,6 +16,15 @@ export const Form = styled.form`
     gap: 10px 20px;
   }
 `;
+
+export const Label = styled(P)`
+  padding-left: 10px;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 18px;
+  color: ${({theme}) => theme.colors.grey200};
+  text-transform: uppercase;
+`
 
 export const SubmitWrapper = styled.div`
   display: flex;

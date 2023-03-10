@@ -7,7 +7,7 @@ import { AppRoutes } from '../../../const';
 
 const Logo: FC = () => {
   return (
-    <Link href={AppRoutes.HOME} >
+    <Link href={AppRoutes.HOME} passHref>
       <StyledLogo>
         <Icon>
           <SharedSvgIcons width={24} height={24} id={'logo'} />

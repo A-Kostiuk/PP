@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-import { Content } from './styled';
+import { Content, Wrapper } from './styled';
 import { LeftColumn, Meow, RightColumn, Text, Title } from './styled';
 import Logo from '../../ui/logo/logo';
 import MainNav from '../../ui/main-nav/main-nav';
+import ToggleTheme from '../../ui/toggle-theme/toggle-theme';
 
 type Props = {
   children: React.ReactNode
@@ -17,7 +18,10 @@ const GlobalLayout: FC<Props> = ({children, isHomePage = false}) => {
       </Head>
       <Content>
         <LeftColumn $isHomePage={isHomePage}>
-          <Logo />
+          <Wrapper>
+            <Logo />
+            <ToggleTheme />
+          </Wrapper>
           <Meow>Meow!</Meow>
           <Title>Welcome to PetProject</Title>
           <Text>Let`&apos;s start</Text>

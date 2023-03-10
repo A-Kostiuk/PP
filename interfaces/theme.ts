@@ -34,7 +34,8 @@ interface Colors {
   btnBackground: string;
   linkBackground: string;
   votingLogBg: string;
-  breedsControlBg: string;
+  breedsControlBgPrimary: string;
+  breedsControlBgSecondary: string;
   photoHover: string;
 }
 

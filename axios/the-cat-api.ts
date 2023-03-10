@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IPostFavorite, IPostVoting } from '../interfaces/the-cat-api';
 import { Image, VotingImage } from '../interfaces/image';
 import { FavoriteImage } from '../interfaces/favorite';
-import { BreedRequest } from '../interfaces/breed';
+import { BreedResponse } from '../interfaces/breed';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -37,12 +37,12 @@ const TheCatApi = {
   },
   breeds: {
     fetchAllBreeds: () => {
-      return api.get<BreedRequest[]>('/breeds');
+      return api.get<BreedResponse[]>('/breeds');
     },
   },
   breed: {
     fetchBreed: (breedId: string | string[]) => {
-      return api.get(`/breeds/${breedId}`);
+      return api.get<BreedResponse>(`/breeds/${breedId}`);
     },
     fetchBreedImages: (breedId: string | string[]) => {
       return api.get(`/images/search?limit=5&breed_ids=${breedId}`);

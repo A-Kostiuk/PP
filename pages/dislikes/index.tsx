@@ -10,6 +10,7 @@ import theCatApi from '../../axios/the-cat-api';
 import Breadcrumbs from '../../components/ui/breadcrumbs/breadcrumbs';
 import PhotosPattern from '../../components/layouts/photos-pattern/photos-pattern';
 import { PhotoItem } from '../../components/ui/photo-item/photo-item';
+import Head from 'next/head';
 
 interface DislikesPageProps {
   images: VotingImage[];
@@ -18,6 +19,9 @@ interface DislikesPageProps {
 const Index: NextPage<DislikesPageProps> = ({images}) => {
   return (
     <GlobalLayout>
+      <Head>
+        <title>Dislikes</title>
+      </Head>
       <Menu />
       <Section>
         <Breadcrumbs marginBottom={20} />
